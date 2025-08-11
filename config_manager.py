@@ -21,6 +21,7 @@ class ModelConfig:
     iou_threshold: float = 0.5
     detection_confidence: float = 0.15
     device: str = 'auto'  # 'auto', 'cpu', 'cuda'
+    min_detection_size: int = 20  # Minimum detection size in pixels
 
 
 @dataclass 

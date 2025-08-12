@@ -1,4 +1,4 @@
-# Settings Reference — Smart Traffic Counter v3.3
+# Referensi Pengaturan — Smart Traffic Counter v3.3
 
 File: `settings.json`
 

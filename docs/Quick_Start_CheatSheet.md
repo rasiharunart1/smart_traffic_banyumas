@@ -1,4 +1,4 @@
-# Quick Start — Smart Traffic Counter v3.3
+# Mulai Cepat — Smart Traffic Counter v3.3
 
 Tujuan: mulai hitung kendaraan dalam 2 menit.
 

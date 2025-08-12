@@ -1,4 +1,4 @@
-# Troubleshooting & FAQ — Smart Traffic Counter v3.3
+# Pemecahan Masalah & FAQ — Smart Traffic Counter v3.3
 
 ## A. Masalah Umum
 

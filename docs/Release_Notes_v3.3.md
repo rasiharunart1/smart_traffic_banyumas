@@ -1,4 +1,4 @@
-# Release Notes — Smart Traffic Counter v3.3
+# Catatan Rilis — Smart Traffic Counter v3.3
 
 Tanggal rilis: 2025-08-12
 

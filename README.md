@@ -165,7 +165,7 @@ Tuning tracking (di `config.py` → `TRACKING_CONFIG`):
 ## Dokumentasi
 - Panduan Pengguna: [docs/User_Manual_SmartTrafficCounter.md](docs/User_Manual_SmartTrafficCounter.md)
 - Mulai Cepat: [docs/Quick_Start_CheatSheet.md](docs/Quick_Start_CheatSheet.md)
-- Troubleshooting & FAQ: [docs/Troubleshooting_FAQ.md](docs/Troubleshooting_FAQ.md)
+- Pemecahan Masalah & FAQ: [docs/Troubleshooting_FAQ.md](docs/Troubleshooting_FAQ.md)
 - Referensi Pengaturan: [docs/Settings_Reference.md](docs/Settings_Reference.md)
 - Catatan Rilis v3.3: [docs/Release_Notes_v3.3.md](docs/Release_Notes_v3.3.md)
 

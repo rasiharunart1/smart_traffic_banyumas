@@ -1,4 +1,4 @@
-# Smart Traffic Counter v3.3 — User Manual
+# Smart Traffic Counter v3.3 — Panduan Pengguna
 
 Dokumen ini menjelaskan cara menggunakan aplikasi Smart Traffic Counter v3.3 untuk deteksi dan penghitungan kendaraan secara real-time.
 
@@ -85,7 +85,7 @@ Antarmuka: GUI (Tkinter)
     - Tips performa
   - Legend arah dan status.
 
-## 5. Alur Kerja Cepat (Quick Start)
+## 5. Alur Kerja Cepat (Mulai Cepat)
 - Pilih sumber input:
   - Screen: klik Select Region atau Full Screen.
   - Webcam: set index kamera (0/1/…).
@@ -185,7 +185,7 @@ Bagian penting:
   - Backup database file.
   - Restore dari backup (hati-hati menimpa data).
 
-## 11. Pemecahan Masalah (lihat juga dokumen Troubleshooting)
+## 11. Pemecahan Masalah (lihat juga dokumen Pemecahan Masalah)
 - Kotak tidak muncul di RAW+Count:
   - Pastikan `runtime.raw_counting_mode=true` dan `raw_detections_mode=false`.
   - Periksa `raw_conf/raw_iou` sesuai (0.25/0.70 rekomendasi awal).

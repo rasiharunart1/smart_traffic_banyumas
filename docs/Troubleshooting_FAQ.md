@@ -1,4 +1,4 @@
-# Troubleshooting & FAQ — Smart Traffic Counter v3.3
+# Pemecahan Masalah & FAQ — Smart Traffic Counter v3.3
 
 ## A. Masalah Umum
 
@@ -20,10 +20,10 @@
 - Jika arah kebalik, set `invert_direction=true`.
 - `detection_stride` otomatis 1 di RAW(+Count), pastikan tidak dimodifikasi.
 
-### 4) Tiga kendaraan berjejer dihitung kurang dari 3
-- Naikkan `runtime.raw_iou` 0.70 → 0.75 agar NMS tidak menggabungkan.
+### 4) Tiga kendaraan berdampingan dihitung kurang dari 3
+- Naikkan `runtime.raw_iou` 0,70 → 0,75 agar NMS tidak menggabungkan.
 - Pastikan `runtime.raw_conf` tidak terlalu tinggi.
-- Turunkan `TRACKING_CONFIG.max_match_distance` (mis. 50–60) agar ID tidak "menyatu`.
+- Turunkan `TRACKING_CONFIG.max_match_distance` (mis. 50–60) agar ID tidak menyatu.
 
 ### 5) FPS rendah
 - Turunkan `runtime.imgsz` ke 512/448.

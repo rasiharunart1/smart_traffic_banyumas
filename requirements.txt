@@ -1,0 +1,14 @@
+ultralytics>=8.3.0
+opencv-python>=4.8.0
+pillow>=10.0.0
+pyautogui>=0.9.54
+numpy>=1.23.0
+mss>=7.0.1
+
+# Torch CPU (untuk GPU, install build CUDA dari pytorch.org)
+torch>=2.2.0
+torchvision>=0.17.0
+
+# Optional DB drivers
+pymysql>=1.1.0
+psycopg2-binary>=2.9.9

@@ -1,0 +1,68 @@
+{
+  "model": {
+    "model_path": "C:/Users/ACER/Documents/1MAGANG/SmartTraffic-eyes/yolo-Weights/yolo11n.pt",
+    "confidence_threshold": 0.1994736842105263,
+    "iou_threshold": 0.9289473684210526,
+    "detection_confidence": 0.14263157894736844,
+    "device": "cpu"
+  },
+  "database": {
+    "type": "mysql",
+    "sqlite_path": "traffic_counts.db",
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "password": "",
+    "database": "vehicle_counters",
+    "auto_save_interval_sec": 0
+  },
+  "line_settings": {
+    "line_type": "manual",
+    "line_color": "#00d4ff",
+    "line_thickness": 3,
+    "show_label": true,
+    "label_text": "COUNT LINE",
+    "band_px": 12,
+    "invert_direction": false
+  },
+  "input": {
+    "type": "screen",
+    "webcam_index": 0,
+    "stream_url": "",
+    "screen_region": [
+      0,
+      218,
+      940,
+      750
+    ]
+  },
+  "runtime": {
+    "imgsz": 640,
+    "use_half": true,
+    "use_roi_around_line": true,
+    "roi_margin_px": 160,
+    "roi_gate_length_px": 600,
+    "roi_safe_pad_px": 48,
+    "detection_stride": 2,
+    "predict_missing": true,
+    "max_prediction_frames": 3,
+    "use_class_filter": true,
+    "draw_paths": true,
+    "max_path_points_drawn": 12,
+    "flush_frames": 2,
+    "use_mss_screen_capture": true,
+    "win_force_dpi_awareness": true,
+    "strict_clamp_boxes": true,
+    "bbox_smooth_mode": "adaptive",
+    "bbox_smooth_alpha": 0.6,
+    "bbox_smooth_alpha_missed": 0.75,
+    "bbox_max_shift_px": 48,
+    "raw_detections_mode": true,
+    "raw_counting_mode": true,
+    "raw_force_full_region": true,
+    "raw_show_all_classes": false,
+    "raw_conf": 0.25,
+    "raw_iou": 0.7,
+    "raw_draw_ids": true
+  }
+}

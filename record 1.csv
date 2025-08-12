@@ -1,0 +1,2 @@
+id,created_at,total_up,total_down,up_json,down_json
+1,2025-08-11 13:55:01,21,3,"{""car"": 19, ""motorcycle"": 0, ""bus"": 1, ""truck"": 1}","{""car"": 2, ""motorcycle"": 0, ""bus"": 0, ""truck"": 1}"

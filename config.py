@@ -1,66 +1,128 @@
-"""
-Configuration file untuk Vehicle Counter Application
-Berisi semua pengaturan yang digunakan oleh aplikasi, termasuk database, model YOLO, tracking, dan tampilan GUI.
-"""
+import json
+from pathlib import Path
 
-# Konfigurasi koneksi ke database PostgreSQL
-DATABASE_CONFIG = {
-    'dbname': "person_counter",         # Nama database
-    'user': "magang",                   # Username database
-    'password': "magang123#",           # Password database
-    'host': "10.98.33.122",             # Alamat IP server database
-    'port': "5433"                      # Port koneksi database
-}
+# Persistent settings file
+SETTINGS_FILE = Path("settings.json")
 
-# Konfigurasi model YOLO
-MODEL_CONFIG = {
-    'model_path': 'yolo11n.pt',         # Path ke file model YOLO
-    'confidence_threshold': 0.05,       # Threshold minimum confidence untuk menampilkan deteksi
-    'iou_threshold': 0.5,               # Threshold IoU untuk NMS (Non-Maximum Suppression)
-    'detection_confidence': 0.15        # Confidence minimum agar deteksi dianggap valid
-}
 
-# Daftar class kendaraan berdasarkan COCO dataset
-VEHICLE_CLASSES = [2, 3, 5, 7]          # Class ID: 2=car, 3=motorcycle, 5=bus, 7=truck
-CLASS_NAMES = {
-    2: 'car',
-    3: 'motorcycle',
-    5: 'bus',
-    7: 'truck'
-}
+class SettingsManager:
+    def __init__(self):
+        # Defaults
+        self.settings = {
+            "model": {
+                "model_path": "yolo11n.pt",
+                "confidence_threshold": 0.40,
+                "iou_threshold": 0.50,
+                "detection_confidence": 0.35,
+                "device": "auto",
+            },
+            "database": {
+                "type": "sqlite",
+                "sqlite_path": "traffic_counts.db",
+                "host": "localhost",
+                "port": 3306,
+                "user": "root",
+                "password": "",
+                "database": "traffic_db",
+                "auto_save_interval_sec": 0
+            },
+            "line_settings": {
+                "line_type": "manual",
+                "line_color": "#00d4ff",
+                "line_thickness": 3,
+                "show_label": True,
+                "label_text": "COUNT LINE",
+                "band_px": 12,
+                "invert_direction": False
+            },
+            "input": {
+                "type": "screen",
+                "webcam_index": 0,
+                "stream_url": "",
+                "screen_region": None
+            },
+            "runtime": {
+                "imgsz": 576,
+                "use_half": True,
+                "use_roi_around_line": True,
+                "roi_margin_px": 120,
+                "roi_gate_length_px": 480,
+                "roi_safe_pad_px": 48,
+                "detection_stride": 3,
+                "predict_missing": False,
+                "max_prediction_frames": 1,
+                "use_class_filter": True,
+                "draw_paths": True,
+                "max_path_points_drawn": 10,
+                "flush_frames": 2,
+                "use_mss_screen_capture": True,
+                "win_force_dpi_awareness": True,
 
-# Konfigurasi tampilan GUI aplikasi
-GUI_CONFIG = {
-    'window_title': "YOLO Vehicle Counter - Screen Capture v2.3 DIRECTIONAL",  # Judul jendela aplikasi
-    'window_size': "1400x900",              # Ukuran jendela GUI
-    'fps_target': 30                        # Target frame per second untuk video
-}
+                # Stabilizer & clamp (dipakai di mode tracking non-RAW)
+                "strict_clamp_boxes": True,
+                "bbox_smooth_mode": "adaptive",
+                "bbox_smooth_alpha": 0.4,
+                "bbox_smooth_alpha_missed": 0.75,
+                "bbox_max_shift_px": 48,
 
-# Pengaturan default untuk garis perhitungan (counting line)
-DEFAULT_LINE_SETTINGS = {
-    'line_color': '#FF0000',                # Warna garis (merah)
-    'line_thickness': 3,                    # Ketebalan garis
-    'line_style': 'solid',                  # Gaya garis: solid, dashed, dll
-    'show_label': True,                     # Tampilkan label pada garis
-    'label_text': 'COUNTING LINE',          # Teks label
-    'detection_threshold': 50,             # Ambang jarak deteksi ke garis (dalam piksel)
-    'line_type': 'manual'                   # Jenis garis: manual atau otomatis
-}
+                # RAW modes
+                "raw_detections_mode": False,      # RAW tampilan saja, tanpa counting
+                "raw_counting_mode": True,         # RAW tampilan + counting via tracker
+                "raw_force_full_region": True,     # deteksi full region agar sama seperti skrip
+                "raw_show_all_classes": False,     # False = filter ke kendaraan (2,3,5,7)
+                "raw_conf": 0.25,                  # threshold RAW (mirip skrip)
+                "raw_iou": 0.70,                   # IoU RAW (mirip skrip)
+                "raw_draw_ids": True               # tampilkan Track ID di atas bbox RAW saat raw_counting_mode
+            }
+        }
+        self._load()
 
-# Konfigurasi untuk sistem pelacakan (tracking)
+    def _load(self):
+        if SETTINGS_FILE.exists():
+            try:
+                with open(SETTINGS_FILE, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    self._deep_update(self.settings, data)
+            except Exception:
+                pass
+
+    def save(self):
+        try:
+            with open(SETTINGS_FILE, "w", encoding="utf-8") as f:
+                json.dump(self.settings, f, indent=2)
+        except Exception:
+            pass
+
+    def _deep_update(self, d, u):
+        for k, v in u.items():
+            if isinstance(v, dict) and k in d and isinstance(d[k], dict):
+                self._deep_update(d[k], v)
+            else:
+                d[k] = v
+
+
+settings_manager = SettingsManager()
+
+MODEL_CONFIG = settings_manager.settings["model"]
+DEFAULT_LINE_SETTINGS = settings_manager.settings["line_settings"]
+RUNTIME_CONFIG = settings_manager.settings["runtime"]
+
 TRACKING_CONFIG = {
-    'max_distance': 50,                    # Jarak maksimum antar frame untuk menganggap objek sama
-    'path_history_length': 10,              # Panjang riwayat jalur pergerakan kendaraan
-    'track_timeout': 3.5,                   # Waktu dalam detik sebelum sebuah track dianggap hilang
-    'min_detection_size': 20                # Ukuran minimum deteksi (lebar/tinggi) agar diproses
+    "min_detection_size": 20,
+    "max_track_lost_frames": 15,
+    "max_match_distance": 80,
+    "predict_missing": RUNTIME_CONFIG["predict_missing"],
+    "max_prediction_frames": RUNTIME_CONFIG["max_prediction_frames"]
 }
 
-# Konfigurasi warna untuk bounding box dan elemen visual lainnya
+CLASS_NAMES = {2: "car", 3: "motorcycle", 5: "bus", 7: "truck"}
+VEHICLE_CLASSES = {2, 3, 5, 7}
+
 COLOR_CONFIG = {
-    'active_vehicle': (0, 255, 0),          # Warna hijau untuk kendaraan yang sedang aktif terdeteksi
-    'counted_vehicle': (128, 128, 128),     # Abu-abu untuk kendaraan yang sudah dihitung
-    'center_dot_active': (0, 0, 255),       # Titik tengah merah untuk kendaraan aktif
-    'center_dot_counted': (64, 64, 64),     # Titik tengah abu-abu gelap untuk kendaraan yang dihitung
-    'tracking_path': (255, 0, 0),           # Jalur pelacakan berwarna biru
-    'tracking_path_counted': (64, 64, 64)   # Jalur pelacakan abu-abu untuk kendaraan yang sudah dihitung
+    "active_vehicle": (0, 255, 0),
+    "counted_vehicle": (128, 128, 128),
+    "center_dot_active": (0, 255, 0),
+    "center_dot_counted": (80, 80, 80),
+    "tracking_path": (0, 255, 255),
+    "tracking_path_counted": (160, 160, 160)
 }

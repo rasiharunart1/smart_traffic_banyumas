@@ -5,6 +5,7 @@ Deteksi kendaraan real-time dan penghitungan arah (UP/DOWN) dengan antarmuka GUI
 - Nama aplikasi: SmartTrafficCounter
 - Model default: yolo11n.pt
 - Output (exe): dist/SmartTrafficCounter/SmartTrafficCounter.exe
+![Uploading image.png…]()
 
 ## Daftar Isi
 - [Fitur](#fitur)

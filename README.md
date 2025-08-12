@@ -1,2 +1,3 @@
-"# smart_traffic_banyumas" 
-"# smart_traffic_banyumas" 
+How To Run : 
+
+python modern_vehicle_counter.py

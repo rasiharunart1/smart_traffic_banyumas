@@ -87,6 +87,8 @@ Lokasi exe:
 - Screen: "Select Region" atau "Full Screen", lalu "Start Preview"
 - Webcam: pilih index (0/1/…), lalu "Start Preview"
 - Network: tempel URL Stream, lalu "Start Preview"
+- <img width="1920" height="1069" alt="image" src="https://github.com/user-attachments/assets/6b9c2f8b-78a3-4788-b572-9db2183835e8" />
+
 
 2) Gambar Garis Hitung (satu garis):
 - Klik "Draw Line", klik-dan-drag pada video, lepas untuk menetapkan
@@ -147,6 +149,8 @@ Tuning tracking (di `config.py` → `TRACKING_CONFIG`):
 - Atur di "DB Settings" pada aplikasi
 - "Save to Database" menyimpan total UP/DOWN per kelas dan agregat
 - "Data Viewer" menampilkan riwayat; tersedia Backup/Restore
+- <img width="945" height="1072" alt="image" src="https://github.com/user-attachments/assets/09f266d2-3a00-49c6-be2b-a91162853674" />
+
 
 ## Pemecahan Masalah
 - Tidak ada `dist/` atau exe:

@@ -50,7 +50,7 @@ Antarmuka: GUI (Tkinter)
 
 ## 4. Antarmuka Pengguna (UI Tour)
 - Header:
-  - Model Settings: ganti model, confidences, IoU, device.
+  - Model Settings: ganti model, confidence, IoU, device.
   - DB Settings: atur koneksi database (SQLite/MySQL).
   - Data Viewer: lihat laporan data tersimpan.
   - Status koneksi DB.
@@ -107,7 +107,7 @@ Antarmuka: GUI (Tkinter)
 - Menampilkan bbox RAW (langsung dari model YOLO) seperti skrip.
 - Tracker tetap berjalan di belakang layar untuk counting (tanpa menggambar bbox tracker).
 - Opsional tampilkan Track ID di label bbox RAW (`runtime.raw_draw_ids = true`).
-- Cocok jika Anda menginginkan visual RAW yang "nempel" dengan counting akurat.
+- Cocok jika Anda menginginkan visual RAW yang konsisten dengan counting akurat.
 
 ### 6.2. RAW-only (tanpa counting)
 - Menampilkan bbox RAW saja, tidak ada ID/track, counting dimatikan.
@@ -116,7 +116,7 @@ Antarmuka: GUI (Tkinter)
 ### 6.3. Tracking (non-RAW)
 - Menampilkan bbox hasil tracker + ID + jalur gerak.
 - Counting tetap berjalan.
-- Cocok jika ingin melihat ID stabil dan lintas jalur kendaraan.
+- Cocok jika ingin melihat ID stabil dan lintasan kendaraan.
 
 ## 7. Menggambar Garis Hitung (Counting Line)
 - Klik "Draw Line", lalu drag di video untuk membuat 1 garis.
@@ -125,7 +125,7 @@ Antarmuka: GUI (Tkinter)
 - Jika arah terbalik dari yang diinginkan, ubah `invert_direction` di Line Settings.
 
 ## 8. Pengaturan (settings.json)
-Lokasi: dibuat otomatis di folder kerja. Dapat diubah saat aplikasi tidak berjalan.
+Lokasi: dibuat otomatis di folder kerja. Edit saat aplikasi tidak berjalan.
 
 Bagian penting:
 - model:
@@ -154,7 +154,7 @@ Bagian penting:
   - `predict_missing`, `max_prediction_frames`: prediksi track yang hilang sementara
   - `use_class_filter`: filter kelas kendaraan saat non-RAW
   - `draw_paths`, `max_path_points_drawn`: gambar jalur (non-RAW)
-  - `flush_frames`: jumlah grab frame untuk mengurangi lag kamera
+  - `flush_frames`: jumlah grab frame kamera untuk kurangi lag
   - `use_mss_screen_capture`: gunakan mss untuk screen capture
   - `win_force_dpi_awareness`: DPI aware (Windows)
   - `raw_detections_mode`: true → RAW-only (counting OFF)
@@ -166,8 +166,8 @@ Bagian penting:
   - `raw_draw_ids`: true/false (tampilkan Track ID di atas bbox RAW saat raw_counting_mode)
 
 ## 9. Tips Akurasi & Performa
-- Tiga kendaraan berjejer tetap dihitung 3 jika:
-  - Deteksi menghasilkan 3 bbox terpisah (atur `raw_iou` lebih tinggi 0.65–0.75 agar NMS tidak menggabung).
+- Tiga kendaraan berdampingan tetap dihitung 3 jika:
+  - Deteksi menghasilkan 3 bbox terpisah (atur `raw_iou` lebih tinggi 0,65–0,75 agar NMS tidak menggabung).
   - Tracker menjaga 3 ID berbeda (turunkan `max_match_distance` jika perlu).
 - RAW(+Count) memaksa `detection_stride = 1` untuk presisi crossing.
 - Jika FPS turun:
@@ -222,7 +222,7 @@ Bagian penting:
   - `raw_force_full_region`: true
   - `band_px`: 12
 - `TRACKING_CONFIG`:
-  - `max_match_distance`: 80 (turunkan ke 50–60 jika ID suka bercampur saat berdesakan)
+  - `max_match_distance`: 80 (turunkan ke 50–60 jika ID mudah bercampur saat padat)
 
 ### Lampiran B — Alur Ideal
 1) Pilih input → 2) Preview → 3) Draw Line → 4) Start Detection → 5) Save to DB → 6) Data Viewer.
